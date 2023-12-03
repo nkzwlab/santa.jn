@@ -7,7 +7,7 @@ import MainContent from '@/components/MainContent.vue'
     <h4>開催日時</h4>
     <p>12月16日(土) 17:30から</p>
     <h4>開催場所</h4>
-    <p>Harlod＆Co</p>
+    <p>Harold＆Co</p>
     <p>
       <a href="https://supertramps.jp/restaurant/harold/"
         >https://supertramps.jp/restaurant/harold/</a
