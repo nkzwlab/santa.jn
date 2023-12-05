@@ -1,7 +1,38 @@
 <script setup lang="ts">
 import MainContent from '@/components/MainContent.vue'
+import { ref, onMounted } from 'vue';
+
+interface Participant {
+  name: string;
+  loginname: string;
+  attribute: string;
+}
+
+const participants = ref<Participant[]>([]);
+
+onMounted(() => {
+  fetchParticipants();
+});
+
+function fetchParticipants() {
+  const url = 'https://api.sheety.co/9d16b6b7e0afa9dd48e3fcf1257b3c4f/xmasParticipant/form1'; 
+  fetch(url)
+    .then(response => response.json())
+    .then(json => {
+      participants.value = json.form1.map((item: any) => ({
+        name: item.フルネーム, 
+        loginname: item.ログイン名,
+        attribute: item.属性 
+      }));
+    })
+    .catch(error => {
+      console.error('データの取得中にエラーが発生しました:', error);
+    });
+}
 </script>
+
 <template>
+  
   <MainContent title="中澤大越研究室クリスマスパーティー">
     <h2 id="-">開催日時・場所(お店へのリンク、地図アプリへのリンク)</h2>
     <h4>開催日時</h4>
@@ -50,8 +81,35 @@ import MainContent from '@/components/MainContent.vue'
     <p>19:00~19:20 余興</p>
     <p>19:30 締めの挨拶</p>
     <p>~20:00 退場</p>
+    <h2 id="-">参加者一覧</h2>
+    <table>
+    <tr>
+      <th>参加者氏名</th>
+      <th>ログイン名</th>
+      <th>属性</th>
+    </tr>
+    <tr v-for="participant in participants" :key="participant.name">
+      <td>{{ participant.name }}</td>
+      <td>{{ participant.loginname }}</td>
+      <td>{{ participant.attribute }}</td>
+    </tr>
+  </table>
+
     <h2 id="-">連絡先</h2>
     <p>M1:影嶋亮太朗（090-6376-2812,kageshima23 (あっとまーく) keio.jp)</p>
     <p>M1:富沢立（070-8981-7627,tatsuru (あっとまーく) keio.jp）</p>
   </MainContent>
 </template>
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+</style>
+
