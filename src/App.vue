@@ -4,20 +4,22 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <div class="wrapper">
-    <header>
+    <header class="header">
       <div class="logo__container">
         <img class="logo" src="@/assets/no-christmas.png" />
-        <span> 中澤・大越研究室 クリスマスパーティー </span>
+        <div class="logo__text">
+          <span> 中澤・大越研究室</span> <span>クリスマスパーティー</span>
+        </div>
       </div>
     </header>
-    <!-- <div class="links">
+    <div class="links">
       <div>
-        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/">イベント概要</RouterLink>
       </div>
       <div>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/participants">参加者一覧</RouterLink>
       </div>
-    </div> -->
+    </div>
     <RouterView />
   </div>
 </template>
@@ -47,6 +49,18 @@ header {
   font-weight: 500;
 }
 
+.logo__text {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  /* shrink */
+  flex-shrink: 1;
+}
+
 .wrapper {
   width: 100%;
   display: flex;
@@ -62,5 +76,24 @@ nav {
 nav::before {
   content: '❄️';
   display: block;
+}
+
+.header {
+  margin: 10px;
+}
+
+.links > div > a {
+  color: white;
+}
+
+.links > div > a:before {
+  content: '❄️';
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.links {
+  display: flex;
+  gap: 20px;
 }
 </style>
