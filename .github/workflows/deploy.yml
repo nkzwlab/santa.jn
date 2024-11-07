@@ -6,15 +6,28 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Build project
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: npm install
+      - name: Build
         run: npm run build
-
-      - name: Deploy to server
-        env:
-          SCP_PASSWORD: ${{ secrets.SCP_PASSWORD }}
+      - name: Create SSH Key
         run: |
-          sshpass -p $SCP_PASSWORD scp -r ./dist/* jn@santa.jn.sfc.keio.ac.jp:/var/www/html
+          echo "$SSH_PRIVATE_KEY" |
+          base64 --decode > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "$SSH_PUBLIC_KEY" |
+          base64 --decode > ~/.ssh/id_rsa.pub
+          chmod 600 ~/.ssh/id_rsa.pub
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
+      - name: Deploy
+        run: |
+          scp -J bastion.jn.sfc.keio.ac.jp ./dist/* jn@santa.jn.sfc.keio.ac.jp:/var/www/html/
