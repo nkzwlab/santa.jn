@@ -35,4 +35,4 @@ jobs:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
       - name: Deploy
         run: |
-          scp -o StrictHostKeyChecking=no -J tatsuru@bastion.jn.sfc.keio.ac.jp ./dist/* jn@santa.jn.sfc.keio.ac.jp:/var/www/html/
+          scp -o StrictHostKeyChecking=no -J tatsuru@ops.jn.sfc.keio.ac.jp ./dist/* jn@santa.jn.sfc.keio.ac.jp:/var/www/html/
