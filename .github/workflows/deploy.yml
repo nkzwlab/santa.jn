@@ -1,20 +1,37 @@
-name: Build and Deploy
+name: Deploy to production
 
 on:
+  push:
+    branches:
+      - master
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-
-      - name: Build project
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
         run: npm run build
-
-      - name: Deploy to server
-        env:
-          SCP_PASSWORD: ${{ secrets.SCP_PASSWORD }}
+      - name: Install WireGuard
         run: |
-          sshpass -p $SCP_PASSWORD scp -r ./dist/* jn@santa.jn.sfc.keio.ac.jp:/var/www/html
+          sudo apt update
+          sudo apt install -y wireguard openresolv
+      - name: Setup WireGuard
+        run: |
+          echo "${{ secrets.VPN_CONF }}" | base64 -d > /tmp/wg0.conf
+          sudo mv /tmp/wg0.conf /etc/wireguard/wg0.conf
+          sudo wg-quick up wg0
+      - name: Deploy file
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 -d > /tmp/id_rsa
+          chmod 600 /tmp/id_rsa
+          scp -i /tmp/id_rsa -o StrictHostKeyChecking=no -r ./dist/* jn@santa.jn.sfc.keio.ac.jp:/var/www/html
+      - name: Disconnect WireGuard
+        run: sudo wg-quick down wg0
