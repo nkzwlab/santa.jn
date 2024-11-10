@@ -6,31 +6,36 @@ import MainContent from '@/components/MainContent.vue'
   <MainContent title="中澤大越研究室クリスマスパーティー">
     <h2 id="-">開催日時・場所(お店へのリンク、地図アプリへのリンク)</h2>
     <h4>開催日時</h4>
-    <p>12月16日(土) 17:30から</p>
+    <p>2024年12月14日(土) 14:00から</p>
     <h4>開催場所</h4>
-    <p>Harold＆Co</p>
+    <p>BRASSERIE CAFÉ LE CONTE</p>
     <p>
       <a href="https://supertramps.jp/restaurant/harold/"
         >https://supertramps.jp/restaurant/harold/</a
       >
     </p>
-    <p>〒107-0061 東京都港区北青山３丁目６−２３ 青山ダイハンビル B1F</p>
+    <p>〒107-0062 東京都港区南青山3-18-19 フェスタ表参道 3F</p>
     <p>
-      グーグルマップ：<a href="https://maps.app.goo.gl/7SUy4P63HpZzhK4i6"
-        >https://maps.app.goo.gl/7SUy4P63HpZzhK4i6</a
+      グーグルマップ：<a href="https://maps.app.goo.gl/CioJapv4DwEnvCXq7"
+        >https://maps.app.goo.gl/CioJapv4DwEnvCXq7</a
       >
     </p>
-    <p>東京メトロ表参道駅B2出口から徒歩30秒</p>
-    <p>表参道駅から143m</p>
+    <p>東京メトロ銀座線 表参道駅A4出口から徒歩1分</p>
+    <p>表参道駅から70m</p>
+    <p>東京メトロ銀座線 外苑前駅a1出口から徒歩11分</p>
+    <p>外苑前駅から810m</p>
+    <p>東京メトロ千代田線 明治神宮前駅から徒歩14分</p>
+    <p>明治神宮前駅から1.1km</p>
+
     <h2 id="-">参加フォーム</h2>
     <p>参加してくださる方は、以下のフォームへの回答をお願いいたします。</p>
     <p>
       参加フォームは<a
-        href="https://docs.google.com/forms/d/e/1FAIpQLSdt80-fEFqZyddYr7rdDecKbxEsQlb8ZSu207VySj-Iu4BCsg/viewform"
+        href="https://forms.gle/WfJwFkfC2KYUAK2n8"
         >こちら</a
       >
     </p>
-    <p>締め切りは1週間前の12月9日(土)です。</p>
+    <p>締め切りは1週間前の12月6日(金)です。</p>
     <h2 id="-">プレゼント交換</h2>
     <p>各自一人一つプレゼントを持ち寄り、ランダムに交換するイベントです！</p>
     <p>プレゼントの予算は2000円程度です。</p>
@@ -44,17 +49,29 @@ import MainContent from '@/components/MainContent.vue'
     </p>
     <p>男性 スーツ/女性 ドレス などが無難です。</p>
     <h2 id="-">当日のタイムスケジュール</h2>
-    <p>17:00~17:30 入場＆会場準備</p>
-    <p>17:30 乾杯</p>
-    <p>18:00~18:20 プレゼント交換タイム</p>
-    <p>18:30~19:00 トーク（ひとり3~5分程度）</p>
-    <p>19:00~19:20 余興</p>
-    <p>19:30 締めの挨拶</p>
-    <p>~20:00 退場</p>
+    <p>13:30~14:00 開場・受付</p>
+    <p>14:15 乾杯</p>
+    <p>14:30~14:50 プレゼント交換タイム</p>
+    <p>15:00~16:00 トーク（ひとり3~5分程度）・余興</p>
+    <p>16:30 締めの挨拶</p>
+    <p>~16:45 退場</p>
+    <h2 id="-">参加者一覧</h2>
+    <table>
+      <tr>
+        <th>参加者氏名</th>
+        <th>ログイン名</th>
+        <th>属性</th>
+      </tr>
+      <tr v-for="participant in sortedParticipants" :key="participant.name">
+        <td>{{ participant.name }}</td>
+        <td>{{ participant.loginname }}</td>
+        <td>{{ participant.attribute }}</td>
+      </tr>
+    </table>
 
     <h2 id="-">連絡先</h2>
-    <p>M1:影嶋亮太朗（090-6376-2812,kageshima23 (あっとまーく) keio.jp)</p>
-    <p>M1:富沢立（070-8981-7627,tatsuru (あっとまーく) keio.jp）</p>
+    <p>M1:浦田 駿（-,- (あっとまーく) keio.jp)</p>
+    <p>M1:伊藤 隆（080-2249-6400,ito_takashi (あっとまーく) keio.jp）</p>
   </MainContent>
 </template>
 <style>
