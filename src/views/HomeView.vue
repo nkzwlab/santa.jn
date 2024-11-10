@@ -62,11 +62,11 @@ import MainContent from '@/components/MainContent.vue'
         <th>ログイン名</th>
         <th>属性</th>
       </tr>
-      <tr v-for="participant in sortedParticipants" :key="participant.name">
+      <!-- <tr v-for="participant in sortedParticipants" :key="participant.name">
         <td>{{ participant.name }}</td>
         <td>{{ participant.loginname }}</td>
         <td>{{ participant.attribute }}</td>
-      </tr>
+      </tr> -->
     </table>
 
     <h2 id="-">連絡先</h2>
