@@ -29,6 +29,6 @@ jobs:
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 -d > /tmp/id_rsa
           chmod 600 /tmp/id_rsa
-          scp -i /tmp/id_rsa -o StrictHostKeyChecking=no -r ./dist/* jn@santa.jn.sfc.keio.ac.jp
+          scp -i /tmp/id_rsa -o StrictHostKeyChecking=no -r ./dist/* jn@santa.jn.sfc.keio.ac.jp:/var/www/html
       - name: Disconnect WireGuard
         run: sudo wg-quick down wg0
