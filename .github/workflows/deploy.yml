@@ -1,38 +1,34 @@
-name: Build and Deploy
+name: Deploy to production
 
 on:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: "20"
+          node-version: '16.x'
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Build
         run: npm run build
-      - name: Create SSH Key
+      - name: Install WireGuard
         run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" |
-          base64 --decode > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          echo "$SSH_PUBLIC_KEY" |
-          base64 --decode > ~/.ssh/id_rsa.pub
-          chmod 600 ~/.ssh/id_rsa.pub
-          echo "$SSH_KNOWN_HOSTS" |
-          base64 --decode > ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
-          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-      - name: Deploy
+          sudo apt update
+          sudo apt install -y wireguard openresolv
+      - name: Setup WireGuard
         run: |
-          scp -o StrictHostKeyChecking=no -J tatsuru@ops.jn.sfc.keio.ac.jp ./dist/* jn@santa.jn.sfc.keio.ac.jp:/var/www/html/
+          echo "${{ secrets.VPN_CONF }}" | base64 -d > /tmp/wg0.conf
+          sudo mv /tmp/wg0.conf /etc/wireguard/wg0.conf
+          sudo wg-quick up wg0
+      - name: Deploy file
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 -d > /tmp/id_rsa
+          chmod 600 /tmp/id_rsa
+          scp -i /tmp/id_rsa -o StrictHostKeyChecking=no -r ./dist/* jn@santa.jn.sfc.keio.ac.jp
+      - name: Disconnect WireGuard
+        run: sudo wg-quick down wg0
