@@ -16,9 +16,9 @@ import { RouterLink, RouterView } from 'vue-router'
       <div>
         <RouterLink to="/">イベント概要</RouterLink>
       </div>
-      <div>
+      <!-- <div>
         <RouterLink to="/participants">参加者一覧</RouterLink>
-      </div>
+      </div> -->
     </div>
     <RouterView />
   </div>
