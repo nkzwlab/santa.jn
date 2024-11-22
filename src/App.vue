@@ -19,6 +19,9 @@ import { RouterLink, RouterView } from 'vue-router'
       <div>
         <RouterLink to="/participants">参加者一覧</RouterLink>
       </div>
+      <div>
+        <RouterLink to="/join">参加フォーム</RouterLink>
+      </div>
     </div>
     <RouterView />
   </div>
@@ -73,6 +76,7 @@ header {
 nav {
   color: #fff;
 }
+
 nav::before {
   content: '❄️';
   display: block;
@@ -82,11 +86,11 @@ nav::before {
   margin: 10px;
 }
 
-.links > div > a {
+.links>div>a {
   color: white;
 }
 
-.links > div > a:before {
+.links>div>a:before {
   content: '❄️';
   display: inline-block;
   margin-right: 5px;
