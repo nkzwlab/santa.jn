@@ -95,7 +95,7 @@ function fetchParticipants() {
     <p>15:00~16:00 トーク（ひとり3~5分程度）・余興</p>
     <p>16:30 締めの挨拶</p>
     <p>~16:45 退場</p>
-    <h2 id="-">参加者一覧</h2>
+    <!-- <h2 id="-">参加者一覧</h2>
     <table>
       <tr>
         <th>参加者氏名</th>
@@ -107,10 +107,10 @@ function fetchParticipants() {
         <td>{{ participant.loginname }}</td>
         <td>{{ participant.attribute }}</td>
       </tr>
-    </table>
+    </table> -->
 
     <h2 id="-">連絡先</h2>
-    <p>M1:浦田 駿（-,- (あっとまーく) keio.jp)</p>
+    <p>M1:浦田 駿（070-3351-0724, uratahayao(あっとまーく) keio.jp）</p>
     <p>M1:伊藤 隆（080-2249-6400,ito_takashi (あっとまーく) keio.jp）</p>
   </MainContent>
 </template>
