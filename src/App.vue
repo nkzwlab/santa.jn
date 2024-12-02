@@ -73,6 +73,7 @@ header {
 nav {
   color: #fff;
 }
+
 nav::before {
   content: '❄️';
   display: block;
@@ -82,11 +83,11 @@ nav::before {
   margin: 10px;
 }
 
-.links > div > a {
+.links>div>a {
   color: white;
 }
 
-.links > div > a:before {
+.links>div>a:before {
   content: '❄️';
   display: inline-block;
   margin-right: 5px;
