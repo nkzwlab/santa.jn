@@ -49,24 +49,24 @@ onMounted(() => {
 
 const data = ref([])
 
-onMounted(async () => {
-  loading.value = true
-  const res = await fetch('http://localhost:8000/records')
-  if (res.ok) {
-    data.value = await res.json()
-  }
-  loading.value = false
+// onMounted(async () => {
+//   // loading.value = true
+//   // const res = await fetch('http://localhost:8000/records')
+//   // if (res.ok) {
+//   //   data.value = await res.json()
+//   // }
+//   // loading.value = false
 
-  console.log(data.value)
+//   // console.log(data.value)
 
-  // participants.value = data.value.records.map((item) => {
-  //   return {
-  //     name: item['name'],
-  //     loginname: item['loginName'],
-  //     attribute: item['zokusei']
-  //   }
-  // })
-})
+//   // participants.value = data.value.records.map((item) => {
+//   //   return {
+//   //     name: item['name'],
+//   //     loginname: item['loginName'],
+//   //     attribute: item['zokusei']
+//   //   }
+//   // })
+// })
 
 </script>
 
