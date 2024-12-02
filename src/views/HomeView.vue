@@ -10,8 +10,8 @@ import MainContent from '@/components/MainContent.vue'
     <h4>開催場所</h4>
     <p>BRASSERIE CAFÉ LE CONTE</p>
     <p>
-      <a href="https://supertramps.jp/restaurant/harold/"
-        >https://supertramps.jp/restaurant/harold/</a
+      <a href="https://brasseriecafeleconte.foodre.jp/"
+        >https://brasseriecafeleconte.foodre.jp/</a
       >
     </p>
     <p>〒107-0062 東京都港区南青山3-18-19 フェスタ表参道 3F</p>
