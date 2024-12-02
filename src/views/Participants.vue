@@ -59,13 +59,13 @@ onMounted(async () => {
 
   console.log(data.value)
 
-  participants.value = data.value.records.map((item) => {
-    return {
-      name: item['name'],
-      loginname: item['loginName'],
-      attribute: item['zokusei']
-    }
-  })
+  // participants.value = data.value.records.map((item) => {
+  //   return {
+  //     name: item['name'],
+  //     loginname: item['loginName'],
+  //     attribute: item['zokusei']
+  //   }
+  // })
 })
 
 </script>
